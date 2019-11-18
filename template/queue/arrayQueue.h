@@ -6,8 +6,7 @@
 using namespace std;
 
 template<typename T>
-class arrayQueue : public queue<T>
-{
+class arrayQueue : public queue<T> {
 public:
 	arrayQueue(int = 10);
 	arrayQueue(const arrayQueue<T>&);
@@ -30,8 +29,7 @@ protected:
 };
 
 template<typename T>
-arrayQueue<T>::arrayQueue(int initialCapcity)
-{
+arrayQueue<T>::arrayQueue(int initialCapcity) {
 	if (initialCapcity < 1)	throw invalid_argument("Queue size must > 0");
 	queueSize = initialCapcity;
 	queueFront = queueTail = 0;
@@ -39,8 +37,7 @@ arrayQueue<T>::arrayQueue(int initialCapcity)
 }
 
 template<typename T>
-arrayQueue<T>::arrayQueue(const arrayQueue<T>& q)
-{
+arrayQueue<T>::arrayQueue(const arrayQueue<T>& q) {
 	queueSize = q.queueSize;
 	queueFront = queueSize - 1;
 	queueTail = q.size() - 1;
@@ -49,22 +46,19 @@ arrayQueue<T>::arrayQueue(const arrayQueue<T>& q)
 }
 
 template<typename T>
-T arrayQueue<T>::front() const
-{
+T arrayQueue<T>::front() const {
 	if (empty())	throw out_of_range("queue is empty");
 	return queue[(queueFront + 1) % queueSize];
 }
 
 template<typename T>
-T arrayQueue<T>::back() const
-{
+T arrayQueue<T>::back() const {
 	if (empty())	throw out_of_range("queue is empty");
 	return queue[queueTail];
 }
 
 template<typename T>
-void arrayQueue<T>::pop()
-{
+void arrayQueue<T>::pop() {
 	if (empty())	throw out_of_range("queue is empty");
 	queueFront++;
 	if (queueFront >= queueSize)	queueFront -= queueSize;
@@ -73,17 +67,14 @@ void arrayQueue<T>::pop()
 
 
 template<typename T>
-void arrayQueue<T>::push(const T& theElement)
-{
-	if ((queueTail + 1) % queueSize == queueFront)
-	{
+void arrayQueue<T>::push(const T& theElement) {
+	if ((queueTail + 1) % queueSize == queueFront) {
 		T* newQueue = new T[2 * queueSize];
 
 		int start = (queueFront + 1) % queueSize;
 		if (start < 2)
 			copy(queue + start, queue + start + queueSize - 1, newQueue);
-		else
-		{
+		else {
 			copy(queue + start, queue + queueSize, newQueue);
 			copy(queue, queue + queueTail + 1, newQueue + queueSize - start);
 		}
@@ -99,15 +90,13 @@ void arrayQueue<T>::push(const T& theElement)
 }
 
 template<typename T>
-void arrayQueue<T>::clear()
-{
+void arrayQueue<T>::clear() {
 	queueFront = queueTail = 0;
 	for (int i = 0; i < queueSize; ++i)	queue[i].~T();
 }
 
 template<typename T>
-arrayQueue<T>& arrayQueue<T>::operator=(const arrayQueue<T>& q)
-{
+arrayQueue<T>& arrayQueue<T>::operator=(const arrayQueue<T>& q) {
 	if (this == &q)	return *this;
 	queueSize = q.queueSize;
 	queueFront = queueSize - 1;

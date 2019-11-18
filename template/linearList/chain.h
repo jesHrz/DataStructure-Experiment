@@ -6,8 +6,7 @@
 using namespace std;
 
 template<typename T>
-struct chainNode
-{
+struct chainNode {
 	T element;
 	chainNode<T>* next;
 	chainNode(const T& _element, chainNode<T>* _next = nullptr) : element(_element), next(_next) {}
@@ -16,8 +15,7 @@ struct chainNode
 
 template<typename T>
 class chain
-	:virtual public linearList<T>
-{
+	:virtual public linearList<T> {
 public:
 	chain(int = 10);
 	chain(const chain<T>&);
@@ -46,8 +44,7 @@ public:
 	const_iterator begin() const { return const_iterator(pHead->next); }
 	const_iterator end() const { return const_iterator(nullptr); }
 
-	class iterator
-	{
+	class iterator {
 	public:
 		typedef forward_iterator_tag iterator_category;
 		typedef T value_type;
@@ -60,13 +57,11 @@ public:
 		T& operator*() { return node->element; }
 		T* operator->() { return &node->element; }
 
-		iterator& operator++()
-		{
+		iterator& operator++() {
 			node = node->next;
 			return *this;
 		}
-		iterator operator++(int)
-		{
+		iterator operator++(int) {
 			iterator old = *this;
 			node = node->next;
 			return old;
@@ -79,8 +74,7 @@ public:
 		chainNode<T>* node;
 	};
 
-	class const_iterator
-	{
+	class const_iterator {
 	public:
 		typedef forward_iterator_tag iterator_category;
 		typedef T value_type;
@@ -93,13 +87,11 @@ public:
 		const T& operator*() { return node->element; }
 		const T* operator->() { return &node->element; }
 
-		const_iterator& operator++()
-		{
+		const_iterator& operator++() {
 			node = node->next;
 			return *this;
 		}
-		const_iterator operator++(int)
-		{
+		const_iterator operator++(int) {
 			const_iterator old = *this;
 			node = node->next;
 			return old;
@@ -122,8 +114,7 @@ protected:
 
 
 template<typename T>
-chain<T>::chain(int initialCapacity)
-{
+chain<T>::chain(int initialCapacity) {
 	if (initialCapacity < 1)	throw out_of_range("the initial Capacity of arrayList must > 0");
 	listSize = 0;
 	pHead = new chainNode<T>(T());
@@ -131,14 +122,12 @@ chain<T>::chain(int initialCapacity)
 }
 
 template<typename T>
-chain<T>::chain(const chain<T>& c)
-{
+chain<T>::chain(const chain<T>& c) {
 	pHead = new chainNode<T>(c.pHead->element);
 	pTail = pHead;
 	chainNode<T>* sourceNode = c.pHead->next;
 	chainNode<T>* currentNode = pHead;
-	while (sourceNode != nullptr)
-	{
+	while (sourceNode != nullptr) {
 		pTail = currentNode->next = new chainNode<T>(sourceNode->element);
 		currentNode = currentNode->next;
 		sourceNode = sourceNode->next;
@@ -147,12 +136,10 @@ chain<T>::chain(const chain<T>& c)
 }
 
 template<typename T>
-chain<T>::~chain()
-{
+chain<T>::~chain() {
 	chainNode<T>* currentNode = pHead->next;
 	chainNode<T>* deleteNode;
-	while (currentNode != nullptr)
-	{
+	while (currentNode != nullptr) {
 		deleteNode = currentNode;
 		currentNode = currentNode->next;
 		delete deleteNode;
@@ -168,12 +155,10 @@ template<typename T>
 int chain<T>::size() const { return listSize; }
 
 template<typename T>
-int chain<T>::find(const T& theElement) const
-{
+int chain<T>::find(const T& theElement) const {
 	int index = 0;
 	chainNode<T>* currentNode = pHead->next;
-	while (currentNode != nullptr)
-	{
+	while (currentNode != nullptr) {
 		if (currentNode->element == theElement)	return index;
 		currentNode = currentNode->next;
 		++index;
@@ -182,8 +167,7 @@ int chain<T>::find(const T& theElement) const
 }
 
 template<typename T>
-void chain<T>::erase(int theIndex)
-{
+void chain<T>::erase(int theIndex) {
 	checkIndex(theIndex);
 	chainNode<T>* deleteNode;
 	chainNode<T>* pre = pHead;
@@ -196,8 +180,7 @@ void chain<T>::erase(int theIndex)
 }
 
 template<typename T>
-void chain<T>::insert(int theIndex, const T& theElement)
-{
+void chain<T>::insert(int theIndex, const T& theElement) {
 	if (theIndex < 0 || theIndex>listSize)	throw out_of_range("illegalIndex");
 	chainNode<T>* pre = pHead;
 	for (int i = 0; i < theIndex; ++i)	pre = pre->next;
@@ -208,12 +191,10 @@ void chain<T>::insert(int theIndex, const T& theElement)
 
 
 template<typename T>
-void chain<T>::clear()
-{
+void chain<T>::clear() {
 	chainNode<T>* currentNode = pHead->next;
 	chainNode<T>* deleteNode;
-	while (currentNode != nullptr)
-	{
+	while (currentNode != nullptr) {
 		deleteNode = currentNode;
 		currentNode = currentNode->next;
 		delete deleteNode;
@@ -224,22 +205,19 @@ void chain<T>::clear()
 }
 
 template<typename T>
-void chain<T>::push_back(const T& theElement)
-{
+void chain<T>::push_back(const T& theElement) {
 	pTail->next = new chainNode<T>(theElement, pTail->next);
 	pTail = pTail->next;
 	listSize++;
 }
 
 template<typename T>
-chain<T>& chain<T>::operator=(const chain<T>& c)
-{
+chain<T>& chain<T>::operator=(const chain<T>& c) {
 	if (this == &c)	return *this;
 	clear();
 	chainNode<T>* currentNode = pHead;
 	chainNode<T>* sourceNode = c.pHead->next;
-	while (sourceNode != nullptr)
-	{
+	while (sourceNode != nullptr) {
 		pTail = currentNode->next = new chainNode<T>(sourceNode->element);
 		currentNode = currentNode->next;
 		sourceNode = sourceNode->next;
@@ -249,8 +227,7 @@ chain<T>& chain<T>::operator=(const chain<T>& c)
 }
 
 template<typename T>
-T& chain<T>::operator[](int index)
-{
+T& chain<T>::operator[](int index) {
 	checkIndex(index);
 	chainNode<T>* currentNode = pHead->next;
 	for (int i = 0; i < index; ++i)	currentNode = currentNode->next;
@@ -258,8 +235,7 @@ T& chain<T>::operator[](int index)
 }
 
 template<typename T>
-const T& chain<T>::operator[](int index) const
-{
+const T& chain<T>::operator[](int index) const {
 	checkIndex(index);
 	chainNode<T>* currentNode = pHead->next;
 	for (int i = 0; i < index; ++i)	currentNode = currentNode->next;
@@ -267,8 +243,7 @@ const T& chain<T>::operator[](int index) const
 }
 
 template<typename T>
-void chain<T>::checkIndex(int theIndex) const
-{
+void chain<T>::checkIndex(int theIndex) const {
 	if (theIndex < 0 || theIndex >= listSize)
 		throw out_of_range("the index is out of range");
 }

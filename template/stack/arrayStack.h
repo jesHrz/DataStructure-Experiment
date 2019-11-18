@@ -6,8 +6,7 @@
 using namespace std;
 
 template<typename T>
-class arrayStack :public stack<T>
-{
+class arrayStack :public stack<T> {
 public:
 	arrayStack(int = 10);
 	arrayStack(const arrayStack<T>&);
@@ -30,47 +29,40 @@ protected:
 };
 
 template<typename T>
-arrayStack<T>::arrayStack(int initialCapacity)
-{
-	if(initialCapacity < 1)	throw out_of_range("the initial Capacity of arrayStack mut > 0");
+arrayStack<T>::arrayStack(int initialCapacity) {
+	if (initialCapacity < 1)	throw out_of_range("the initial Capacity of arrayStack mut > 0");
 	stackSize = initialCapacity;
 	stack = new T[stackSize];
 	stackTop = 0;
 }
 
 template<typename T>
-arrayStack<T>::arrayStack(const arrayStack<T>& s)
-{
+arrayStack<T>::arrayStack(const arrayStack<T>& s) {
 	stackSize = s.stackSize;
 	stackTop = 0;
 	stack = new T[stackSize];
-	while (stackTop < s.stackTop)
-	{
+	while (stackTop < s.stackTop) {
 		stack[stackTop] = s.stack[stackTop];
 		stackTop++;
 	}
 }
 
 template<typename T>
-T arrayStack<T>::top() const
-{
+T arrayStack<T>::top() const {
 	if (stackTop <= 0)	throw out_of_range("stack is empty");
 	return stack[stackTop - 1];
 }
 
 template<typename T>
-void arrayStack<T>::pop()
-{
+void arrayStack<T>::pop() {
 	if (stackTop <= 0)	throw out_of_range("stack is empty");
 	stack[--stackTop].~T();
 }
 
 template<typename T>
-void arrayStack<T>::push(const T& theElement)
-{
-	if (stackTop == stackSize)
-	{
-		
+void arrayStack<T>::push(const T& theElement) {
+	if (stackTop == stackSize) {
+
 		T* newStack = new T[stackSize * 2];
 		copy(stack, stack + stackTop, newStack);
 		delete stack;
@@ -81,20 +73,17 @@ void arrayStack<T>::push(const T& theElement)
 }
 
 template<typename T>
-void arrayStack<T>::clear()
-{
+void arrayStack<T>::clear() {
 	while (stackTop > 0)	stack[--stackTop].~T();
 }
 
 template<typename T>
-arrayStack<T>& arrayStack<T>::operator=(const arrayStack<T>& s)
-{
+arrayStack<T>& arrayStack<T>::operator=(const arrayStack<T>& s) {
 	if (this == &s)	return *this;
 	stackSize = s.stackSize;
 	stackTop = 0;
 	stack = new T[stackSize];
-	while (stackTop < s.stackTop)
-	{
+	while (stackTop < s.stackTop) {
 		stack[stackTop] = s.stack[stackTop];
 		stackTop++;
 	}

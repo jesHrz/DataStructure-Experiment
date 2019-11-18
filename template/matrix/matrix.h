@@ -5,8 +5,7 @@
 using namespace std;
 
 template <typename T>
-class matrix
-{
+class matrix {
 public:
 	matrix(int, int);
 	matrix(const matrix<T>&);
@@ -39,45 +38,40 @@ protected:
 };
 
 template<typename T>
-matrix<T>::matrix(int rows, int columns) :row(rows), col(columns)
-{
+matrix<T>::matrix(int rows, int columns) :row(rows), col(columns) {
 	if (rows < 1 || columns < 1)	throw invalid_argument("row and column must > 0");
-	element = new T[rows*columns];
+	element = new T[rows * columns];
 }
 
 template<typename T>
-matrix<T>::matrix(const matrix<T>& m) : row(m.row), col(m.col)
-{
-	element = new T[row*col];
+matrix<T>::matrix(const matrix<T>& m) : row(m.row), col(m.col) {
+	element = new T[row * col];
 	for (int i = 1; i <= row; ++i)
 		for (int j = 1; j <= col; ++j)
 			operator()(i, j) = m(i, j);
 }
 
 template<typename T>
-T& matrix<T>::operator()(int rows, int columns)
-{
+T& matrix<T>::operator()(int rows, int columns) {
 	if (rows < 1 || rows > row || columns < 1 || columns > col)
 		throw out_of_range("out of range of matrix");
-	return element[(rows - 1)*col + (columns - 1)];
+	return element[(rows - 1) * col + (columns - 1)];
 }
 
 template<typename T>
-const T& matrix<T>::operator()(int rows, int columns) const
-{
+const T& matrix<T>::operator()(int rows, int columns) const {
 	if (rows < 1 || rows > row || columns < 1 || columns > col)
 		throw out_of_range("out of range of matrix");
-	return element[(rows - 1)*col + (columns - 1)];
+	return element[(rows - 1) * col + (columns - 1)];
 }
 
 template<typename T>
-matrix<T>& matrix<T>::operator=(const matrix<T>& m)
-{
+matrix<T>& matrix<T>::operator=(const matrix<T>& m) {
 	if (this == &m)	return *this;
 	row = m.row;
 	col = m.col;
 	delete[]element;
-	element = new T[row*col];
+	element = new T[row * col];
 	for (int i = 1; i <= row; ++i)
 		for (int j = 1; j <= col; ++j)
 			operator()(i, j) = m(i, j);
@@ -85,8 +79,7 @@ matrix<T>& matrix<T>::operator=(const matrix<T>& m)
 }
 
 template<typename T>
-matrix<T> matrix<T>::operator+(const matrix<T>& m) const
-{
+matrix<T> matrix<T>::operator+(const matrix<T>& m) const {
 	if (row != m.row || col != m.col)
 		throw logic_error("No match of row or column");
 	matrix<T> res(row, col);
@@ -97,8 +90,7 @@ matrix<T> matrix<T>::operator+(const matrix<T>& m) const
 }
 
 template<typename T>
-matrix<T> matrix<T>::operator-() const
-{
+matrix<T> matrix<T>::operator-() const {
 	matrix<T> res(row, col);
 	for (int i = 1; i <= row; ++i)
 		for (int j = 1; j <= col; ++j)
@@ -107,8 +99,7 @@ matrix<T> matrix<T>::operator-() const
 }
 
 template<typename T>
-matrix<T> matrix<T>::operator-(const matrix<T>& m) const
-{
+matrix<T> matrix<T>::operator-(const matrix<T>& m) const {
 	if (row != m.row || col != m.col)
 		throw logic_error("No match of row or column while performing addition operator");
 	matrix<T> res(row, col);
@@ -119,8 +110,7 @@ matrix<T> matrix<T>::operator-(const matrix<T>& m) const
 }
 
 template<typename T>
-matrix<T> matrix<T>::operator*(const matrix<T>& m) const
-{
+matrix<T> matrix<T>::operator*(const matrix<T>& m) const {
 	if (col != m.row)
 		throw logic_error("No match of row and column while performing multiply operation");
 	matrix<T> res(row, m.col);
@@ -128,34 +118,29 @@ matrix<T> matrix<T>::operator*(const matrix<T>& m) const
 }
 
 template<typename T>
-matrix<T> matrix<T>::operator*(const T& coefficient) const
-{
+matrix<T> matrix<T>::operator*(const T& coefficient) const {
 	matrix<T> res(row, col);
 	for (int i = 1; i <= row; ++i)
 		for (int j = 1; j <= col; ++j)
-			res(i, j) = coefficient*operator()(i, j);
+			res(i, j) = coefficient * operator()(i, j);
 	return res;
 }
 
 template<typename T>
-matrix<T>& matrix<T>::operator+=(const matrix<T>& m)
-{
+matrix<T>& matrix<T>::operator+=(const matrix<T>& m) {
 	*this = *this + m;
 	return *this;
 }
 
 template<typename T>
-matrix<T>& matrix<T>::operator-=(const matrix<T>& m)
-{
+matrix<T>& matrix<T>::operator-=(const matrix<T>& m) {
 	*this = *this - m;
 	return *this;
 }
 
 template<typename T>
-ostream& operator<<(ostream& out, const matrix<T>& m)
-{
-	for (int i = 1; i <= m.row; ++i)
-	{
+ostream& operator<<(ostream& out, const matrix<T>& m) {
+	for (int i = 1; i <= m.row; ++i) {
 		for (int j = 1; j <= m.col; ++j)
 			out << m(i, j) << ' ';
 		out << endl;
@@ -164,8 +149,7 @@ ostream& operator<<(ostream& out, const matrix<T>& m)
 }
 
 template<typename T>
-istream& operator>>(istream& in, matrix<T>& m)
-{
+istream& operator>>(istream& in, matrix<T>& m) {
 	for (int i = 1; i <= m.row; ++i)
 		for (int j = 1; j <= m.col; ++j)
 			in >> m(i, j);

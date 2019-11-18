@@ -79,8 +79,7 @@ int binary_seach_tree<T>::insert(node*& rt, const T& element) {
 			return 1;
 		}
 		return insert(rt->rightChild, element);
-	}
-	else if (rt->element.second > element) {
+	} else if (rt->element.second > element) {
 		if (rt->leftChild == nullptr) {
 			node* new_node = new node(make_pair(0, element));
 			new_node->father = rt;
@@ -111,8 +110,7 @@ void binary_seach_tree<T>::erase(const T& element) {
 			if (pp->father == p) {//if p is pp's father
 				pp->father->rightChild = pp->rightChild;
 				if (pp->rightChild != nullptr)	pp->rightChild->father = pp->father;
-			}
-			else {//let pp's rightChild be its father's leftChild 
+			} else {//let pp's rightChild be its father's leftChild 
 				pp->father->leftChild = pp->rightChild;
 				if (pp->rightChild != nullptr)	pp->rightChild->father = pp->father;
 			}
@@ -133,20 +131,17 @@ void binary_seach_tree<T>::erase(const T& element) {
 				if (p->father->leftChild == p)	p->father->leftChild = p->leftChild;
 				else p->father->rightChild = p->leftChild;
 				if (p->leftChild != nullptr)	p->leftChild->father = p->father;
-			}
-			else {
+			} else {
 				this->root = p->leftChild;
 			}
 			delete p;
 			return;
-		}
-		else if (p->rightChild != nullptr) {
+		} else if (p->rightChild != nullptr) {
 			if (p != this->root) {
 				if (p->father->leftChild == p)	p->father->leftChild = p->rightChild;
 				else p->father->rightChild = p->rightChild;
 				if (p->rightChild != nullptr)p->rightChild->father = p->father;
-			}
-			else {
+			} else {
 				this->root = p->rightChild;
 			}
 			delete p;
@@ -155,8 +150,7 @@ void binary_seach_tree<T>::erase(const T& element) {
 		//check whether p is the root
 		if (p == this->root) {
 			this->root = pp;
-		}
-		else {
+		} else {
 			if (p->father->leftChild == p)	p->father->leftChild = pp;
 			else p->father->rightChild = pp;
 		}
@@ -173,8 +167,7 @@ binaryTreeNode<pair<int, T>>* binary_seach_tree<T>::erase(node* rt, const T& ele
 		node* tmp = erase(rt->leftChild, element);
 		if (tmp != nullptr)	--rt->element.first;
 		return tmp;
-	}
-	else return rt;
+	} else return rt;
 }
 
 template<typename T>
@@ -192,8 +185,7 @@ void binary_seach_tree<T>::erase_by_rank(int rank) {
 			if (pp->father == p) {//if p is pp's father
 				pp->father->rightChild = pp->rightChild;
 				if (pp->rightChild != nullptr)	pp->rightChild->father = pp->father;
-			}
-			else {//let pp's rightChild be its father's leftChild 
+			} else {//let pp's rightChild be its father's leftChild 
 				pp->father->leftChild = pp->rightChild;
 				if (pp->rightChild != nullptr)	pp->rightChild->father = pp->father;
 			}
@@ -214,20 +206,17 @@ void binary_seach_tree<T>::erase_by_rank(int rank) {
 				if (p->father->leftChild == p)	p->father->leftChild = p->leftChild;
 				else p->father->rightChild = p->leftChild;
 				if (p->leftChild != nullptr)	p->leftChild->father = p->father;
-			}
-			else {
+			} else {
 				this->root = p->leftChild;
 			}
 			delete p;
 			return;
-		}
-		else if (p->rightChild != nullptr) {
+		} else if (p->rightChild != nullptr) {
 			if (p != this->root) {
 				if (p->father->leftChild == p)	p->father->leftChild = p->rightChild;
 				else p->father->rightChild = p->rightChild;
 				if (p->rightChild != nullptr)p->rightChild->father = p->father;
-			}
-			else {
+			} else {
 				this->root = p->rightChild;
 			}
 			delete p;
@@ -236,8 +225,7 @@ void binary_seach_tree<T>::erase_by_rank(int rank) {
 		//check whether p is the root
 		if (p == this->root) {
 			this->root = pp;
-		}
-		else {
+		} else {
 			if (p->father->leftChild == p)	p->father->leftChild = pp;
 			else p->father->rightChild = pp;
 		}
@@ -254,8 +242,7 @@ binaryTreeNode<pair<int, T>>* binary_seach_tree<T>::erase_by_rank(node* rt, int 
 		node* tmp = erase_by_rank(rt->leftChild, rank);
 		if (tmp != nullptr)	--rt->element.first;
 		return tmp;
-	}
-	else return rt;
+	} else return rt;
 }
 
 #endif //BINARY_SEARCH_TREE

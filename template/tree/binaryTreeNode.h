@@ -8,7 +8,7 @@ struct binaryTreeNode {
 	binaryTreeNode<T>* rightChild;//ÓÒ×ÓÊ÷
 	binaryTreeNode<T>* father;//¸¸Ç×
 
-	binaryTreeNode(){}
+	binaryTreeNode() {}
 	binaryTreeNode(const T& theElement) : element(theElement) {
 		leftChild = rightChild = father = nullptr;
 	}

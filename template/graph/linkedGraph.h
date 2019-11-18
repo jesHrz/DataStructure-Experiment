@@ -73,8 +73,7 @@ public:
 			if (method) {
 				this->dfs(i);
 				cout << endl;
-			}
-			else this->bfs(i);
+			} else this->bfs(i);
 		}
 		return tot;
 	}

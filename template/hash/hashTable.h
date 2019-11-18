@@ -37,7 +37,7 @@ hashTable<K, E>::hashTable(int _divisor) {
 	if (_divisor < 1)	throw logic_error("the divisor must greater than 0.");
 	divisor = _divisor;
 	dsize = 0;
-	table = new pair<const K, E>*[divisor];
+	table = new pair<const K, E> * [divisor];
 	for (int i = 0; i < divisor; ++i)	table[i] = nullptr;
 }
 
@@ -77,17 +77,14 @@ void hashTable<K, E>::erase(const K& key) {
 		while (Next != o && table[Next] != nullptr) {
 			int ash = hash(table[Next]->first) % divisor;
 			if (Next > i) {
-				if (ash > Next || ash <= i)
-				{
+				if (ash > Next || ash <= i) {
 					pair<const K, E>* tmp = table[Next];
 					table[Next] = table[i];
 					table[i] = tmp;
 					i = Next;
 				}
-			}
-			else {
-				if (ash > Next && ash <= i)
-				{
+			} else {
+				if (ash > Next&& ash <= i) {
 					pair<const K, E>* tmp = table[Next];
 					table[Next] = table[i];
 					table[i] = tmp;
@@ -108,8 +105,7 @@ void hashTable<K, E>::insert(const K& key, const E& value) {
 			table[i] = new pair<const K, E>(key, value);
 			dsize++;
 			return;
-		}
-		else if (table[i]->first == key) {
+		} else if (table[i]->first == key) {
 			table[i]->second = value;
 			return;
 		}

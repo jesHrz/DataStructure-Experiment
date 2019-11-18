@@ -7,8 +7,7 @@
 using namespace std;
 
 template<typename T>
-class linkedQueue:public queue<T>
-{
+class linkedQueue :public queue<T> {
 public:
 	linkedQueue() :queueFront(nullptr), queueBack(nullptr), queueSize(0) {};
 	linkedQueue(const linkedQueue<T>&);
@@ -30,19 +29,14 @@ protected:
 };
 
 template<typename T>
-linkedQueue<T>::linkedQueue(const linkedQueue<T>& q)
-{
-	if (q.empty())
-	{
+linkedQueue<T>::linkedQueue(const linkedQueue<T>& q) {
+	if (q.empty()) {
 		queueFront = queueBack = nullptr;
 		queueSize = 0;
-	}
-	else
-	{
+	} else {
 		queueFront = queueBack = new chainNode<T>(q.queueFront->element);
 		chainNode<T>* sourceNode = q.queueFront->next;
-		while (sourceNode != nullptr)
-		{
+		while (sourceNode != nullptr) {
 			queueBack->next = new chainNode<T>(sourceNode->element);
 			queueBack = queueBack->next;
 			sourceNode = sourceNode->next;
@@ -52,10 +46,8 @@ linkedQueue<T>::linkedQueue(const linkedQueue<T>& q)
 }
 
 template<typename T>
-linkedQueue<T>::~linkedQueue()
-{
-	while (queueFront != nullptr)
-	{
+linkedQueue<T>::~linkedQueue() {
+	while (queueFront != nullptr) {
 		chainNode<T>* nextNode = queueFront->next;
 		delete queueFront;
 		queueFront = nextNode;
@@ -64,22 +56,19 @@ linkedQueue<T>::~linkedQueue()
 }
 
 template<typename T>
-T linkedQueue<T>::front() const
-{
+T linkedQueue<T>::front() const {
 	if (queueSize < 1)	throw out_of_range("the queue is empty");
 	return queueFront->element;
 }
 
 template<typename T>
-T linkedQueue<T>::back() const
-{
+T linkedQueue<T>::back() const {
 	if (queueSize < 1)	throw out_of_range("the queue is empty");
 	return queueBack->element;
 }
 
 template<typename T>
-void linkedQueue<T>::pop()
-{
+void linkedQueue<T>::pop() {
 	if (queueSize < 1)	throw out_of_range("the queue is empty");
 	chainNode<T>* nextNode = queueFront->next;
 	delete queueFront;
@@ -88,8 +77,7 @@ void linkedQueue<T>::pop()
 }
 
 template<typename T>
-void linkedQueue<T>::push(const T& theElement)
-{
+void linkedQueue<T>::push(const T& theElement) {
 	chainNode<T>* newNode = new chainNode<T>(theElement);
 	if (queueSize == 0)	queueFront = newNode;
 	else queueBack->next = newNode;
@@ -98,10 +86,8 @@ void linkedQueue<T>::push(const T& theElement)
 }
 
 template<typename T>
-void linkedQueue<T>::clear()
-{
-	while (queueFront != nullptr)
-	{
+void linkedQueue<T>::clear() {
+	while (queueFront != nullptr) {
 		chainNode<T>* nextNode = queueFront->next;
 		delete queueFront;
 		queueFront = nextNode;
@@ -111,21 +97,16 @@ void linkedQueue<T>::clear()
 }
 
 template<typename T>
-linkedQueue<T>& linkedQueue<T>::operator=(const linkedQueue<T>& q)
-{
+linkedQueue<T>& linkedQueue<T>::operator=(const linkedQueue<T>& q) {
 	if (this == &q)	return *this;
 	clear();
-	if (q.empty())
-	{
+	if (q.empty()) {
 		queueFront = queueBack = nullptr;
 		queueSize = 0;
-	}
-	else
-	{
+	} else {
 		queueFront = queueBack = new chainNode<T>(q.queueFront->element);
 		chainNode<T>* sourceNode = q.queueFront->next;
-		while (sourceNode != nullptr)
-		{
+		while (sourceNode != nullptr) {
 			queueBack->next = new chainNode<T>(sourceNode->element);
 			queueBack = queueBack->next;
 			sourceNode = sourceNode->next;

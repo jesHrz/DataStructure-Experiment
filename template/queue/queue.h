@@ -2,8 +2,7 @@
 #define __QUEUE_H_
 
 template<typename T>
-class queue
-{
+class queue {
 public:
 	virtual ~queue() {};
 	virtual bool empty() const = 0;

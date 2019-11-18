@@ -2,8 +2,7 @@
 #define __STACK_H_
 
 template<typename T>
-class stack
-{
+class stack {
 public:
 	virtual ~stack() {};
 	virtual bool empty() const = 0;

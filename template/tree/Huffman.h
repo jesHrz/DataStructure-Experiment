@@ -31,7 +31,7 @@ public:
 
 	void preOrder(binaryTreeNode<pti>*);
 	void inOrder(binaryTreeNode<pti>*);
-	void postOrder(binaryTreeNode<pti> *);
+	void postOrder(binaryTreeNode<pti>*);
 	void levelOrder(binaryTreeNode<pti>*);
 
 	void destroy(binaryTreeNode<pti>*);
@@ -51,7 +51,7 @@ Huffman<T>::~Huffman() {
 
 template <typename T>
 binaryTreeNode<pair<T, int> >* Huffman<T>::create() {
-	while(h.size() > 1) {
+	while (h.size() > 1) {
 		binaryTreeNode<pair<T, int>>* t1 = h.top(); h.pop();
 		binaryTreeNode<pair<T, int>>* t2 = h.top(); h.pop();
 		binaryTreeNode<pair<T, int>>* t = new binaryTreeNode<pair<T, int>>(make_pair(0, t1->element.second + t2->element.second));
@@ -91,7 +91,7 @@ template <typename T>
 void Huffman<T>::levelOrder(binaryTreeNode<pti>* rt) {
 	linkedQueue<binaryTreeNode<pti>*> q;
 	q.push(rt);
-	while(!q.empty()) {
+	while (!q.empty()) {
 		binaryTreeNode<pti>* p = q.front(); q.pop();
 		if (p == nullptr)	continue;
 		cout << p->element.second << ' ';

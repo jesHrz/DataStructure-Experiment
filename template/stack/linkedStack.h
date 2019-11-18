@@ -7,8 +7,7 @@
 using namespace std;
 
 template<typename T>
-class linkedStack : public stack<T>
-{
+class linkedStack : public stack<T> {
 public:
 	linkedStack() :stackTop(nullptr), stackSize(0) {};
 	linkedStack(const linkedStack<T>&);
@@ -31,20 +30,15 @@ protected:
 
 
 template<typename T>
-linkedStack<T>::linkedStack(const linkedStack<T>& s)
-{
-	if (s.stackSize == 0)
-	{
+linkedStack<T>::linkedStack(const linkedStack<T>& s) {
+	if (s.stackSize == 0) {
 		stackTop = nullptr;
 		stackSize = 0;
-	}
-	else
-	{
+	} else {
 		stackTop = new chainNode<T>(s.stackTop->element);
 		chainNode<T>* sourceNode = s.stackTop->next;
 		chainNode<T>* currentNode = stackTop;
-		while (sourceNode != nullptr)
-		{
+		while (sourceNode != nullptr) {
 			currentNode->next = new chainNode<T>(sourceNode->element);
 			currentNode = currentNode->next;
 			sourceNode = sourceNode->next;
@@ -54,10 +48,8 @@ linkedStack<T>::linkedStack(const linkedStack<T>& s)
 }
 
 template<typename T>
-linkedStack<T>::~linkedStack()
-{
-	while (stackTop != nullptr)
-	{
+linkedStack<T>::~linkedStack() {
+	while (stackTop != nullptr) {
 		chainNode<T>* nextNode = stackTop->next;
 		delete stackTop;
 		stackTop = nextNode;
@@ -65,15 +57,13 @@ linkedStack<T>::~linkedStack()
 }
 
 template<typename T>
-T linkedStack<T>::top() const
-{
+T linkedStack<T>::top() const {
 	if (stackSize == 0)	throw out_of_range("stack is empty");
 	return stackTop->element;
 }
 
 template<typename T>
-void linkedStack<T>::pop()
-{
+void linkedStack<T>::pop() {
 	if (stackSize == 0)	throw out_of_range("stack is empty");
 	chainNode<T>* nextNode = stackTop->next;
 	delete stackTop;
@@ -82,17 +72,14 @@ void linkedStack<T>::pop()
 }
 
 template<typename T>
-void linkedStack<T>::push(const T& theElement)
-{
+void linkedStack<T>::push(const T& theElement) {
 	stackTop = new chainNode<T>(theElement, stackTop);
 	stackSize++;
 }
 
 template<typename T>
-void linkedStack<T>::clear()
-{
-	while (stackTop != nullptr)
-	{
+void linkedStack<T>::clear() {
+	while (stackTop != nullptr) {
 		chainNode<T>* nextNode = stackTop->next;
 		delete stackTop;
 		stackTop = nextNode;
@@ -101,21 +88,16 @@ void linkedStack<T>::clear()
 }
 
 template<typename T>
-linkedStack<T>& linkedStack<T>::operator=(const linkedStack<T>& s)
-{
+linkedStack<T>& linkedStack<T>::operator=(const linkedStack<T>& s) {
 	if (this == &s)	return *this;
-	if (s.stackSize == 0)
-	{
+	if (s.stackSize == 0) {
 		stackTop = nullptr;
 		stackSize = 0;
-	}
-	else
-	{
+	} else {
 		stackTop = new chainNode<T>(s.stackTop->element);
 		chainNode<T>* sourceNode = s.stackTop->next;
 		chainNode<T>* currentNode = stackTop;
-		while (sourceNode != nullptr)
-		{
+		while (sourceNode != nullptr) {
 			currentNode->next = new chainNode<T>(sourceNode->element);
 			currentNode = currentNode->next;
 			sourceNode = sourceNode->next;

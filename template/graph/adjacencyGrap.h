@@ -12,14 +12,14 @@ template<typename T>
 class adjacencyGraph {
 public:
 	explicit adjacencyGraph(const int n, T MAX = 0x3fffffff) :n(n), MAX(MAX) {
-		e = new T*[n + 1];
+		e = new T * [n + 1];
 		for (auto i = 0; i <= n; ++i)	e[i] = new T[n + 1];
 		for (auto i = 0; i <= n; ++i)
 			for (auto j = 0; j <= n; ++j) {
 				if (i == j)	e[i][j] = 0;
 				else e[i][j] = MAX;
 			}
-		g = new T*[n + 1];
+		g = new T * [n + 1];
 		for (auto i = 0; i <= n; ++i)	g[i] = new T[n + 1];
 		vis = new bool[n + 1];
 		for (auto i = 0; i <= n; ++i)	vis[i] = false;
@@ -74,8 +74,7 @@ public:
 			if (method) {
 				this->dfs(i);
 				cout << endl;
-			}
-			else this->bfs(i);
+			} else this->bfs(i);
 		}
 		return tot;
 	}

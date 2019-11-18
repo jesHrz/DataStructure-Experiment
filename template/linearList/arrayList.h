@@ -8,8 +8,7 @@ using namespace std;
 
 template<typename T>
 class arrayList
-	:virtual public linearList<T>
-{
+	:virtual public linearList<T> {
 public:
 	arrayList(int = 10);
 	arrayList(const arrayList<T>&);
@@ -37,8 +36,7 @@ public:
 	iterator begin() { return iterator(element); }
 	iterator end() { return iterator(element + listSize); }
 
-	class iterator
-	{
+	class iterator {
 	public:
 		typedef bidirectional_iterator_tag iterator_category;
 		typedef T value_type;
@@ -51,25 +49,21 @@ public:
 		T& operator*() { return *position; }
 		T* operator->() { return &*position; }
 
-		iterator& operator++()
-		{
+		iterator& operator++() {
 			++position;
 			return *this;
 		}
-		iterator operator++(int)
-		{
+		iterator operator++(int) {
 			iterator old = *this;
 			++position;
 			return old;
 		}
 
-		iterator& operator--()
-		{
+		iterator& operator--() {
 			--position;
 			return *this;
 		}
-		iterator operator--(int)
-		{
+		iterator operator--(int) {
 			iterator old = *this;
 			--position;
 			return old;
@@ -83,8 +77,7 @@ public:
 	};
 
 
-	class const_iterator
-	{
+	class const_iterator {
 	public:
 		typedef bidirectional_iterator_tag iterator_category;
 		typedef T value_type;
@@ -97,25 +90,21 @@ public:
 		const T& operator*() { return *position; }
 		const T* operator->() { return &*position; }
 
-		const_iterator& operator++()
-		{
+		const_iterator& operator++() {
 			++position;
 			return *this;
 		}
-		const_iterator operator++(int)
-		{
+		const_iterator operator++(int) {
 			const_iterator old = *this;
 			++position;
 			return old;
 		}
 
-		const_iterator& operator--()
-		{
+		const_iterator& operator--() {
 			--position;
 			return *this;
 		}
-		const_iterator operator--(int)
-		{
+		const_iterator operator--(int) {
 			const_iterator old = *this;
 			--position;
 			return old;
@@ -136,8 +125,7 @@ protected:
 };
 
 template<typename T>
-arrayList<T>::arrayList(int initialCapacity)
-{
+arrayList<T>::arrayList(int initialCapacity) {
 	if (initialCapacity < 1)
 		throw out_of_range("the initial Capacity of arrayList mut > 0");
 	arrayLength = initialCapacity;
@@ -146,8 +134,7 @@ arrayList<T>::arrayList(int initialCapacity)
 }
 
 template<typename T>
-arrayList<T>::arrayList(const arrayList<T>& a)
-{
+arrayList<T>::arrayList(const arrayList<T>& a) {
 	arrayLength = a.arrayLength;
 	listSize = a.listSize;
 	element = new T[arrayLength];
@@ -168,8 +155,7 @@ int arrayList<T>::size() const { return listSize; }
 
 
 template<typename T>
-int arrayList<T>::find(const T& theElement) const
-{
+int arrayList<T>::find(const T& theElement) const {
 	int i;
 	for (i = 0; i < listSize && element[i] != theElement; ++i);
 	if (i == listSize)	return -1;
@@ -178,8 +164,7 @@ int arrayList<T>::find(const T& theElement) const
 
 
 template<typename T>
-void arrayList<T>::erase(int theIndex)
-{
+void arrayList<T>::erase(int theIndex) {
 	checkIndex(theIndex);
 	copy(element + theIndex + 1, element + listSize, element + theIndex);
 	element[--listSize].~T();
@@ -187,14 +172,12 @@ void arrayList<T>::erase(int theIndex)
 
 
 template<typename T>
-void arrayList<T>::insert(int theIndex, const T& theElement)
-{
+void arrayList<T>::insert(int theIndex, const T& theElement) {
 	if (theIndex < 0 || theIndex > listSize)
 		throw out_of_range("illegalIndex");
-	if (listSize == arrayLength)
-	{
+	if (listSize == arrayLength) {
 		arrayLength *= 2;
-		T *tmp = new T[arrayLength];
+		T* tmp = new T[arrayLength];
 		copy(element, element + listSize, tmp);
 		delete[] element;
 		element = tmp;
@@ -206,18 +189,15 @@ void arrayList<T>::insert(int theIndex, const T& theElement)
 
 
 template<typename T>
-void arrayList<T>::clear()
-{
+void arrayList<T>::clear() {
 	delete[]element;
 	element = new T[arrayLength];
 	listSize = 0;
 }
 
 template<typename T>
-void arrayList<T>::push_back(const T& theElement)
-{
-	if (listSize == arrayLength)
-	{
+void arrayList<T>::push_back(const T& theElement) {
+	if (listSize == arrayLength) {
 		arrayLength *= 2;
 		T* tmp = new T[arrayLength];
 		copy(element, element + listSize, tmp);
@@ -229,16 +209,14 @@ void arrayList<T>::push_back(const T& theElement)
 
 
 template<typename T>
-T& arrayList<T>::operator[](int theIndex)
-{
+T& arrayList<T>::operator[](int theIndex) {
 	checkIndex(theIndex);
 	return element[theIndex];
 }
 
 
 template<typename T>
-arrayList<T>& arrayList<T>::operator=(const arrayList<T>& a)
-{
+arrayList<T>& arrayList<T>::operator=(const arrayList<T>& a) {
 	if (this == &a)	return *this;
 	listSize = a.listSize;
 	arrayLength = a.arrayLength;
@@ -250,16 +228,14 @@ arrayList<T>& arrayList<T>::operator=(const arrayList<T>& a)
 
 
 template<typename T>
-const T& arrayList<T>::operator[](int theIndex) const
-{
+const T& arrayList<T>::operator[](int theIndex) const {
 	checkIndex(theIndex);
 	return element[theIndex];
 }
 
 
 template<typename T>
-void arrayList<T>::checkIndex(int theIndex) const
-{
+void arrayList<T>::checkIndex(int theIndex) const {
 	if (theIndex < 0 || theIndex >= listSize)
 		throw out_of_range("the index is out of range!");
 }

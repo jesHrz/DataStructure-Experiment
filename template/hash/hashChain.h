@@ -55,8 +55,7 @@ template<typename K, typename E>
 void hashChain<K, E>::erase(const K& key) {
 	int index = hash(key) % divisor;
 	int j = 0;
-	for (auto it = table[index].begin(); it != table[index].end(); ++it)
-	{
+	for (auto it = table[index].begin(); it != table[index].end(); ++it) {
 		if (it->first == key) {
 			table[index].erase(j);
 			dsize--;

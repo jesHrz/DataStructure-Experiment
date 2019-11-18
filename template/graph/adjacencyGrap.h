@@ -1,9 +1,10 @@
 #ifndef adjacencyGraph_
 #define adjacencyGraph_
 
+#include <algorithm>
 #include <cstring>
-#include <queue/linkedQueue.h>
 #include <iostream>
+#include <queue/linkedQueue.h>
 #include "ufset.h"
 using namespace std;
 

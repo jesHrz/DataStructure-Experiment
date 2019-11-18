@@ -121,7 +121,7 @@ void hashTable<K, E>::insert(const K& key, const E& value) {
 template<typename K, typename E>
 void hashTable<K, E>::output(ostream& out) const {
 	for (int i = 0; i < divisor; ++i) {
-		out << "NO." << i << " bucket:";
+		out << "NO." << i << " bucket: ";
 		if (table[i] == nullptr)	out << "NULL" << endl;
 		else out << table[i]->first << ' ' << table[i]->second << endl;
 	}

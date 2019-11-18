@@ -1,7 +1,8 @@
-#include "test1.h"
-#include <stack/linkedStack.h>
-#include <sstream>
 #include <iostream>
+#include <sstream>
+#include <stack/linkedStack.h>
+#include "test1.h"
+
 using namespace std;
 
 //×Ö·û´®×ªÊý×Ö

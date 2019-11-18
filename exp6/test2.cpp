@@ -1,6 +1,6 @@
-#include "test2.h"
 #include <iostream>
-#include <cstdio>
+#include "test2.h"
+
 using namespace std;
 
 char e[55][55];

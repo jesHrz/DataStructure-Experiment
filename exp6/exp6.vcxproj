@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{8B3FAAA8-5947-45AC-A4C3-F63AD3B1E99E}</ProjectGuid>
-    <RootNamespace>exp6</RootNamespace>
+    <RootNamespace>exp06</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>exp06</ProjectName>
   </PropertyGroup>
